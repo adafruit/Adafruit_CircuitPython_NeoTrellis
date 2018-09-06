@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 """
-`adafruit_RGB_trellis`
+`adafruit_NEO_trellis`
 ====================================================
 
 4x4 elastomer buttons and RGB LEDs
@@ -44,22 +44,22 @@ Implementation Notes
 # imports
 
 __version__ = "0.0.0-auto.0"
-__repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_RGB_trellis.git"
+__repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_neotrellis.git"
 
 from time import sleep
 from micropython import const
 from adafruit_seesaw.keypad import Keypad, KeyEvent
 from adafruit_seesaw.neopixel import NeoPixel
 
-_RGB_TRELLIS_ADDR = const(0x2E)
+_NEO_TRELLIS_ADDR = const(0x2E)
 
-_RGB_TRELLIS_NEOPIX_PIN = const(3)
+_NEO_TRELLIS_NEOPIX_PIN = const(3)
 
-_RGB_TRELLIS_NUM_ROWS = const(4)
-_RGB_TRELLIS_NUM_COLS = const(4)
-_RGB_TRELLIS_NUM_KEYS = const(16)
+_NEO_TRELLIS_NUM_ROWS = const(4)
+_NEO_TRELLIS_NUM_COLS = const(4)
+_NEO_TRELLIS_NUM_KEYS = const(16)
 
-_RGB_TRELLIS_MAX_CALLBACKS = const(32)
+_NEO_TRELLIS_MAX_CALLBACKS = const(32)
 
 def _key(xval):
     return int(int(xval/4)*8 + (xval%4))
@@ -67,18 +67,18 @@ def _key(xval):
 def _seesaw_key(xval):
     return int(int(xval/8)*4 + (xval%8))
 
-class RGBTrellis(Keypad):
-    """Driver for the Adafruit RGB Trellis."""
-    def __init__(self, i2c_bus, interrupt=False, addr=_RGB_TRELLIS_ADDR, drdy=None):
+class NeoTrellis(Keypad):
+    """Driver for the Adafruit NeoTrellis."""
+    def __init__(self, i2c_bus, interrupt=False, addr=_NEO_TRELLIS_ADDR, drdy=None):
         super(Keypad, self).__init__(i2c_bus, addr, drdy)
         self.interrupt_enabled = interrupt
-        self.callbacks = [None] * _RGB_TRELLIS_NUM_KEYS
-        self.pixels = NeoPixel(self, _RGB_TRELLIS_NEOPIX_PIN, _RGB_TRELLIS_NUM_KEYS)
+        self.callbacks = [None] * _NEO_TRELLIS_NUM_KEYS
+        self.pixels = NeoPixel(self, _NEO_TRELLIS_NEOPIX_PIN, _NEO_TRELLIS_NUM_KEYS)
 
     def activate_key(self, key, edge, enable=True):
         """Activate or deactivate a key on the trellis. Key is the key number from
            0 to 16. Edge specifies what edge to register an event on and can be
-           RGBTrellis.EDGE_FALLING or RGBTrellis.EDGE_RISING. enable should be set
+           NeoTrellis.EDGE_FALLING or NeoTrellis.EDGE_RISING. enable should be set
            to True if the event is to be enabled, or False if the event is to be
            disabled."""
         self.set_event(_key(key), edge, enable)
@@ -92,5 +92,5 @@ class RGBTrellis(Keypad):
             buf = self.read_keypad(available)
             for raw in buf:
                 evt = KeyEvent(_seesaw_key((raw >> 2) & 0x3F), raw & 0x3)
-                if evt.number < _RGB_TRELLIS_NUM_KEYS and self.callbacks[evt.number] is not None:
+                if evt.number < _NEO_TRELLIS_NUM_KEYS and self.callbacks[evt.number] is not None:
                     self.callbacks[evt.number](evt)
