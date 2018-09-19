@@ -23,8 +23,7 @@ Table of Contents
 .. toctree::
     :caption: Tutorials
 
-.. todo:: Add any Learn guide links here. If there are none, then simply delete this todo and leave
-    the toctree above for use later.
+    https://learn.adafruit.com/adafruit-neotrellis/circuitpython-code
 
 .. toctree::
     :caption: Related Products
@@ -35,7 +34,7 @@ Table of Contents
 .. toctree::
     :caption: Other Links
 
-    Download <https://github.com/adafruit/adafruit_CircuitPython_RGB_trellis/releases/latest>
+    Download <https://github.com/adafruit/adafruit_CircuitPython_NeoTrellis/releases/latest>
     CircuitPython Reference Documentation <https://circuitpython.readthedocs.io>
     CircuitPython Support Forum <https://forums.adafruit.com/viewforum.php?f=60>
     Discord Chat <https://adafru.it/discord>

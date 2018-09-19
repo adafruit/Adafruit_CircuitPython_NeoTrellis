@@ -9,10 +9,10 @@ from adafruit_neotrellis.multitrellis import MultiTrellis
 i2c_bus = busio.I2C(SCL, SDA)
 
 #create the trellis
-trelli = [ 
-            [ NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F) ],
-            [ NeoTrellis(i2c_bus, False, addr=0x30), NeoTrellis(i2c_bus, False, addr=0x61) ]
-         ]
+trelli = [
+    [NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F)],
+    [NeoTrellis(i2c_bus, False, addr=0x30), NeoTrellis(i2c_bus, False, addr=0x31)]
+    ]
 
 trellis = MultiTrellis(trelli)
 
@@ -26,13 +26,13 @@ BLUE = (0, 0, 255)
 PURPLE = (180, 0, 255)
 
 #this will be called when button events are received
-def blink(x,y,edge):
+def blink(xcoord, ycoord, edge):
     #turn the LED on when a rising edge is detected
     if edge == NeoTrellis.EDGE_RISING:
-        trellis.color(x, y, BLUE)
+        trellis.color(xcoord, ycoord, BLUE)
     #turn the LED off when a rising edge is detected
     elif edge == NeoTrellis.EDGE_FALLING:
-        trellis.color(x, y, OFF)
+        trellis.color(xcoord, ycoord, OFF)
 
 for y in range(8):
     for x in range(8):
@@ -48,7 +48,6 @@ for y in range(8):
     for x in range(8):
         trellis.color(x, y, OFF)
         time.sleep(.05)
-        pass
 
 while True:
     #the trellis can only be read every 17 millisecons or so

@@ -20,7 +20,7 @@ extensions = [
 # Uncomment the below if you use native CircuitPython modules such as
 # digitalio, micropython and busio. List the modules you use. Without it, the
 # autodoc module docs will fail to generate with a warning.
-# autodoc_mock_imports = ["digitalio", "busio"]
+autodoc_mock_imports = ["digitalio", "busio", "micropython"]
 
 
 intersphinx_mapping = {'python': ('https://docs.python.org/3.4', None),'BusDevice': ('https://circuitpython.readthedocs.io/projects/busdevice/en/latest/', None),'Register': ('https://circuitpython.readthedocs.io/projects/register/en/latest/', None),'CircuitPython': ('https://circuitpython.readthedocs.io/en/latest/', None)}
@@ -34,7 +34,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Adafruit RGB_trellis Library'
+project = u'Adafruit NeoTrellis Library'
 copyright = u'2018 Dean Miller'
 author = u'Dean Miller'
 
@@ -109,7 +109,7 @@ html_static_path = ['_static']
 html_favicon = '_static/favicon.ico'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'AdafruitRgb_trellisLibrarydoc'
+htmlhelp_basename = 'AdafruitNeoTrellisLibrarydoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -135,7 +135,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'AdafruitRGB_trellisLibrary.tex', u'AdafruitRGB_trellis Library Documentation',
+    (master_doc, 'AdafruitNeoTrellisLibrary.tex', u'AdafruitNeoTrellis Library Documentation',
      author, 'manual'),
 ]
 
@@ -144,7 +144,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'AdafruitRGB_trellislibrary', u'Adafruit RGB_trellis Library Documentation',
+    (master_doc, 'AdafruitNeoTrellisLibrary', u'Adafruit NeoTrellis Library Documentation',
      [author], 1)
 ]
 
@@ -154,7 +154,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'AdafruitRGB_trellisLibrary', u'Adafruit RGB_trellis Library Documentation',
-     author, 'AdafruitRGB_trellisLibrary', 'One line description of project.',
+    (master_doc, 'AdafruitNeoTrellisLibrary', u'Adafruit NeoTrellis Library Documentation',
+     author, 'AdafruitNeoTrellisLibrary', 'One line description of project.',
      'Miscellaneous'),
 ]

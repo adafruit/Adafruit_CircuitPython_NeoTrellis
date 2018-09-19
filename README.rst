@@ -1,19 +1,19 @@
 Introduction
 ============
 
-.. image:: https://readthedocs.org/projects/adafruit-circuitpython-rgb_trellis/badge/?version=latest
-    :target: https://circuitpython.readthedocs.io/projects/rgb_trellis/en/latest/
+.. image:: https://readthedocs.org/projects/adafruit-circuitpython-neotrellis/badge/?version=latest
+    :target: https://circuitpython.readthedocs.io/projects/neotrellis/en/latest/
     :alt: Documentation Status
 
 .. image:: https://img.shields.io/discord/327254708534116352.svg
     :target: https://discord.gg/nBQh6qu
     :alt: Discord
 
-.. image:: https://travis-ci.org/adafruit/adafruit_CircuitPython_RGB_trellis.svg?branch=master
-    :target: https://travis-ci.org/adafruit/adafruit_CircuitPython_RGB_trellis
+.. image:: https://travis-ci.org/adafruit/adafruit_CircuitPython_NeoTrellis.svg?branch=master
+    :target: https://travis-ci.org/adafruit/adafruit_CircuitPython_NeoTrellis
     :alt: Build Status
 
-.. todo:: Describe what the library does.
+This is a library for using the Adafruit_NeoTrellis boards with circuitpython.
 
 Dependencies
 =============
@@ -30,13 +30,64 @@ This is easily achieved by downloading
 Usage Example
 =============
 
-.. todo:: Add a quick, simple example. It and other examples should live in the examples folder and be included in docs/examples.rst.
+import time
+
+from board import SCL, SDA
+import busio
+from adafruit_neotrellis.neotrellis import NeoTrellis
+
+#create the i2c object for the trellis
+i2c_bus = busio.I2C(SCL, SDA)
+
+#create the trellis
+trellis = NeoTrellis(i2c_bus)
+
+#some color definitions
+OFF = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 150, 0)
+GREEN = (0, 255, 0)
+CYAN = (0, 255, 255)
+BLUE = (0, 0, 255)
+PURPLE = (180, 0, 255)
+
+#this will be called when button events are received
+def blink(event):
+    #turn the LED on when a rising edge is detected
+    if event.edge == NeoTrellis.EDGE_RISING:
+        trellis.pixels[event.number] = CYAN
+    #turn the LED off when a rising edge is detected
+    elif event.edge == NeoTrellis.EDGE_FALLING:
+        trellis.pixels[event.number] = OFF
+
+for i in range(16):
+    #activate rising edge events on all keys
+    trellis.activate_key(i, NeoTrellis.EDGE_RISING)
+    #activate falling edge events on all keys
+    trellis.activate_key(i, NeoTrellis.EDGE_FALLING)
+    #set all keys to trigger the blink callback
+    trellis.callbacks[i] = blink
+
+    #cycle the LEDs on startup
+    trellis.pixels[i] = PURPLE
+    time.sleep(.05)
+
+for i in range(16):
+    trellis.pixels[i] = OFF
+    time.sleep(.05)
+
+while True:
+    #call the sync function call any triggered callbacks
+    trellis.sync()
+    #the trellis can only be read every 17 millisecons or so
+    time.sleep(.02)
+
 
 Contributing
 ============
 
 Contributions are welcome! Please read our `Code of Conduct
-<https://github.com/adafruit/adafruit_CircuitPython_RGB_trellis/blob/master/CODE_OF_CONDUCT.md>`_
+<https://github.com/adafruit/adafruit_CircuitPython_NeoTrellis/blob/master/CODE_OF_CONDUCT.md>`_
 before contributing to help this project stay welcoming.
 
 Building locally
@@ -64,7 +115,7 @@ Then run the build:
 
 .. code-block:: shell
 
-    circuitpython-build-bundles --filename_prefix adafruit-circuitpython-rgb_trellis --library_location .
+    circuitpython-build-bundles --filename_prefix adafruit-circuitpython-neotrellis --library_location .
 
 Sphinx documentation
 -----------------------

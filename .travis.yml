@@ -27,7 +27,7 @@ install:
   - pip install --force-reinstall pylint==1.9.2
 
 script:
-  - pylint adafruit_rgb_trellis.py
+  - pylint adafruit_neotrellis
   - ([[ ! -d "examples" ]] || pylint --disable=missing-docstring,invalid-name,bad-whitespace examples/*.py)
-  - circuitpython-build-bundles --filename_prefix adafruit-circuitpython-rgb_trellis --library_location .
+  - circuitpython-build-bundles --filename_prefix adafruit-circuitpython-neotrellis --library_location .
   - cd docs && sphinx-build -E -W -b html . _build/html

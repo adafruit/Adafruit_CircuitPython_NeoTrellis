@@ -3,6 +3,6 @@ Simple test
 
 Ensure your device works with this simple test.
 
-.. literalinclude:: ../examples/rgb_trellis_simpletest.py
-    :caption: examples/rgb_trellis_simpletest.py
+.. literalinclude:: ../examples/neotrellis_simpletest.py
+    :caption: examples/neotrellis_simpletest.py
     :linenos:

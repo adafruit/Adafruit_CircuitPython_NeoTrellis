@@ -2,13 +2,13 @@ import time
 
 from board import SCL, SDA
 import busio
-from adafruit_rgb_trellis import RGBTrellis
+from adafruit_neotrellis.neotrellis import NeoTrellis
 
 #create the i2c object for the trellis
 i2c_bus = busio.I2C(SCL, SDA)
 
 #create the trellis
-trellis = RGBTrellis(i2c_bus)
+trellis = NeoTrellis(i2c_bus)
 
 #some color definitions
 OFF = (0, 0, 0)
@@ -22,17 +22,17 @@ PURPLE = (180, 0, 255)
 #this will be called when button events are received
 def blink(event):
     #turn the LED on when a rising edge is detected
-    if event.edge == RGBTrellis.EDGE_RISING:
+    if event.edge == NeoTrellis.EDGE_RISING:
         trellis.pixels[event.number] = CYAN
     #turn the LED off when a rising edge is detected
-    elif event.edge == RGBTrellis.EDGE_FALLING:
+    elif event.edge == NeoTrellis.EDGE_FALLING:
         trellis.pixels[event.number] = OFF
 
 for i in range(16):
     #activate rising edge events on all keys
-    trellis.activate_key(i, RGBTrellis.EDGE_RISING)
+    trellis.activate_key(i, NeoTrellis.EDGE_RISING)
     #activate falling edge events on all keys
-    trellis.activate_key(i, RGBTrellis.EDGE_FALLING)
+    trellis.activate_key(i, NeoTrellis.EDGE_FALLING)
     #set all keys to trigger the blink callback
     trellis.callbacks[i] = blink
 

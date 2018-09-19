@@ -70,7 +70,7 @@ def _seesaw_key(xval):
 class NeoTrellis(Keypad):
     """Driver for the Adafruit NeoTrellis."""
     def __init__(self, i2c_bus, interrupt=False, addr=_NEO_TRELLIS_ADDR, drdy=None):
-        super(Keypad, self).__init__(i2c_bus, addr, drdy)
+        super().__init__(i2c_bus, addr, drdy)
         self.interrupt_enabled = interrupt
         self.callbacks = [None] * _NEO_TRELLIS_NUM_KEYS
         self.pixels = NeoPixel(self, _NEO_TRELLIS_NEOPIX_PIN, _NEO_TRELLIS_NUM_KEYS)
