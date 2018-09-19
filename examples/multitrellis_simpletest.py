@@ -8,7 +8,14 @@ from adafruit_neotrellis.multitrellis import MultiTrellis
 #create the i2c object for the trellis
 i2c_bus = busio.I2C(SCL, SDA)
 
-#create the trellis
+"""create the trellis. This is for a 2x2 array of NeoTrellis boards
+for a 2x1 array (2 boards connected left to right) you would use:
+
+trelli = [
+    [NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F)]
+    ]
+
+"""
 trelli = [
     [NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F)],
     [NeoTrellis(i2c_bus, False, addr=0x30), NeoTrellis(i2c_bus, False, addr=0x31)]
