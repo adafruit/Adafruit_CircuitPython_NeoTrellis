@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 """
-`adafruit_NEO_trellis`
+`adafruit_neotrellis`
 ====================================================
 
 4x4 elastomer buttons and RGB LEDs
