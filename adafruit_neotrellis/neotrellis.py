@@ -89,6 +89,7 @@ class NeoTrellis(Keypad):
         available = self.count
         sleep(.0005)
         if available > 0:
+            available = available + 2
             buf = self.read_keypad(available)
             for raw in buf:
                 evt = KeyEvent(_seesaw_key((raw >> 2) & 0x3F), raw & 0x3)
