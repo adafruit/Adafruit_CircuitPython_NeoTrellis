@@ -17,6 +17,7 @@ deploy:
   password:
     secure: ImidU9Jbc3Vb76684icR9KYM34kB2y0ViGGWkFF6c2Wvw5kfevvABS+jSfUX1C+OtEiNdqKeJLPdFUyDjL99LYjGe1VOvkZU4cq85btF4+dB+uQ/h+3WVUd2rT2wY6Zy+YEzO0MWylY3bwAsQBocemwyTooEDt5MsaSugQE/eCna/D3Yg/pj/Be5T3YpG310RqjOChRldrk6uGTto/AAdH5N2Y+VEkJNp31WgMWOcBKj96gOn181NkTYts4NIZZDTzSLkRsKdTnZUwCXELyIteTWhSDAbQ5Mfg1kcFPrKi3wiJHcE7zPkHVHpnsKPrs282mRZjgZs0gZYZDZm/8S+T4jpbQkUxYHlz2ZIB8jjXsdr0hyqeFGQBs221LA8a0NZYnjdfI7IkNr36vrfQ5gPq/GKhvMsJPL0F58cMT5J3wRrabMfPowo7g5Vth3IIWMXdxVMnYRn+Amd3tTDIH0cogtraKOZAIRXGSj+QM6PBkuvjj8OdDOsiWxMfVMJQtYjQ3McHChfNB27zUTSOyH/IulM4Ua1KQzQNVTtL8/MBPsZrc4wr8U5/wNs6ERoGOJPsgdEo1GbrJg/x5xcrBeIv+5ff6861LEIKV7wvqD5Sw3mhHH0pgLLdohIqR0XLDQe3OP2QfdEPesM/rvkP8T7i2yMD7eJKERxRKjfbTfrao=
 install:
+- pip install -r requirements.txt
 - pip install circuitpython-build-tools Sphinx sphinx-rtd-theme
 - pip install --force-reinstall pylint==1.9.2
 script:
