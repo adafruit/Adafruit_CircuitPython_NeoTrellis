@@ -7,25 +7,22 @@ from adafruit_neotrellis.neotrellis import NeoTrellis
 from adafruit_neotrellis.multitrellis import MultiTrellis
 
 #create the i2c object for the trellis
-i2c_bus = busio.I2C(SCL, SDA)
+I2C = busio.I2C(SCL, SDA)
 
-"""create the trellis. This is for a 2x2 array of NeoTrellis boards
-for a 2x1 array (2 boards connected left to right) you would use:
+"""create the trellis. This is for a 2x2 array of TrellisM4 (first row) with 2 Neotrellis (second row).
 
-trelli = [
-    [NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F)]
-    ]
-
+ [ NeoM4_left | NeoM4_right ]
+  neotrellis0 | neotrellis1
 """
 
-trelli_left = NeoTrellisM4()
-trelli_right = NeoTrellisM4(left_part=trelli_left)
-trellim4 = [
-    [trelli_left, trelli_right],
-    [NeoTrellis(i2c_bus, False, addr=0x2F), NeoTrellis(i2c_bus, False, addr=0x2E)]
+trellim4_left = NeoTrellisM4()
+trellim4_right = NeoTrellisM4(left_part=trellim4_left)
+trelli = [
+    [trellim4_left, trellim4_right],
+    [NeoTrellis(I2C, False, addr=0x2F), NeoTrellis(I2C, False, addr=0x2E)]
     ]
 
-trellis = MultiTrellis(trellim4)
+trellis = MultiTrellis(trelli)
 
 #some color definitions
 OFF = (0, 0, 0)

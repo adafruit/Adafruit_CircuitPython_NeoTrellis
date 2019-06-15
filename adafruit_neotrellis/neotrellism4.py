@@ -96,7 +96,7 @@ class _TrellisNeoPixel:
         return self.pix[_key(key) + self._offset]
 
     def fill(self, color):
-        """fill method wrapper
+        """Fill method wrapper
         """
         # Suppress auto_write while filling.
         current_auto_write = self.auto_write
@@ -122,14 +122,14 @@ class _TrellisKeypad:
         self._offset = part
         col_pins = []
         for x in range(self._offset, self._offset + _NEO_TRELLIS_NUM_COLS):
-            d = digitalio.DigitalInOut(getattr(board, "COL{}".format(x)))
-            col_pins.append(d)
+            col_pin = digitalio.DigitalInOut(getattr(board, "COL{}".format(x)))
+            col_pins.append(col_pin)
 
         if part == _TRELLISM4_LEFT_PART:
             self.row_pins = []
             for y in range(_NEO_TRELLIS_NUM_ROWS):
-                d = digitalio.DigitalInOut(getattr(board, "ROW{}".format(y)))
-                self.row_pins.append(d)
+                row_pin = digitalio.DigitalInOut(getattr(board, "ROW{}".format(y)))
+                self.row_pins.append(row_pin)
         elif part == _TRELLISM4_RIGHT_PART:
             if row_pins is None:
                 raise ValueError("Missing row_pins list for the right part")
@@ -210,13 +210,12 @@ class NeoTrellisM4:
         """Only for compatibility with neotrellis module
         interrupts are disable on trellis M4 keypad
         """
-
         print("Warning: no interrupt with Trellis M4 keypad (method does nothing)")
     # pylint: enable=unused-argument, no-self-use
 
     @property
     def count(self):
-        """Return the pressed keys count ???
+        """Return the pressed keys count
         """
         self._read_keypad()
         return len(self._current_events)
@@ -224,12 +223,13 @@ class NeoTrellisM4:
     # pylint: disable=unused-argument, no-self-use
     @count.setter
     def count(self, value):
-        """Only for compatibility with neotrellis module"""
+        """Only for compatibility with neotrellis module
+        """
         raise AttributeError("count is read only")
     # pylint: enable=unused-argument, no-self-use
 
     def set_event(self, key, edge, enable):
-        """Set event on a key:
+        """Set event on a key
         """
         if enable not in (True, False):
             raise ValueError("event enable must be True or False")
@@ -260,7 +260,7 @@ class NeoTrellisM4:
             self._key_edges[k] = self.EDGE_RISING
         for k in self._current_press - pressed:
             self._key_edges[k] = self.EDGE_FALLING
-        # print(self._key_edges)
+
         self._current_press = pressed
         self._current_events = bytearray()
 
@@ -275,12 +275,15 @@ class NeoTrellisM4:
            0 to 15. Edge specifies what edge to register an event on and can be
            NeoTrellis.EDGE_FALLING or NeoTrellis.EDGE_RISING. enable should be set
            to True if the event is to be enabled, or False if the event is to be
-           disabled."""
+           disabled.
+           """
         self.set_event(key, edge, enable)
+
 
     def sync(self):
         """Read any events from the Trellis hardware and call associated
-           callbacks"""
+           callbacks
+           """
         available = self.count
         if available > 0:
             available = available + 2
