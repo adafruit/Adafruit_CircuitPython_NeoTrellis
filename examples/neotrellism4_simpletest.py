@@ -1,7 +1,5 @@
 import time
 
-import board
-import busio
 from adafruit_neotrellis.neotrellism4 import NeoTrellisM4
 
 

@@ -9,7 +9,8 @@ from adafruit_neotrellis.multitrellis import MultiTrellis
 #create the i2c object for the trellis
 I2C = busio.I2C(SCL, SDA)
 
-"""create the trellis. This is for a 2x2 array of TrellisM4 (first row) with 2 Neotrellis (second row).
+"""create the trellis. This is for a 2x2 array of TrellisM4 (first row) with
+2 Neotrellis (second row).
 
  [ NeoM4_left | NeoM4_right ]
   neotrellis0 | neotrellis1

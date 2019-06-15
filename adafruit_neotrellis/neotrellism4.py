@@ -47,11 +47,12 @@ __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_neotrellis.git"
 
 import board
-from adafruit_matrixkeypad import Matrix_Keypad
 import digitalio
-from neopixel import NeoPixel
-from adafruit_seesaw.keypad import KeyEvent
 from micropython import const
+from adafruit_seesaw.keypad import KeyEvent
+from adafruit_matrixkeypad import Matrix_Keypad
+from neopixel import NeoPixel
+
 
 _NEO_TRELLIS_NUM_ROWS = const(4)
 _NEO_TRELLIS_NUM_COLS = const(4)
@@ -78,10 +79,10 @@ class _TrellisNeoPixel:
     """
     # Lots of stuff come from Adafruit_CircuitPython_seesaw/neopixel.py
 
-    def __init__(self, pin, auto_write=True, brightness=1.0,
+    def __init__(self, auto_write=True, brightness=1.0,
                  part=_TRELLISM4_LEFT_PART, left_part=None):
         if part == _TRELLISM4_LEFT_PART:
-            self.pix = NeoPixel(pin, 32, auto_write=False, brightness=brightness)
+            self.pix = NeoPixel(board.NEOPIXEL, 32, auto_write=False, brightness=brightness)
         elif part == _TRELLISM4_RIGHT_PART:
             self.pix = left_part.pix
         self.auto_write = auto_write
@@ -182,11 +183,11 @@ class NeoTrellisM4:
     def __init__(self, left_part=None):
         if left_part is None:
             self._offset = _TRELLISM4_LEFT_PART
-            self.pixels = _TrellisNeoPixel(board.NEOPIXEL)
+            self.pixels = _TrellisNeoPixel()
             self.keypad = _TrellisKeypad()
         else:
             self._offset = _TRELLISM4_RIGHT_PART
-            self.pixels = _TrellisNeoPixel(board.NEOPIXEL, 32,
+            self.pixels = _TrellisNeoPixel(32,
                                            part=_TRELLISM4_RIGHT_PART,
                                            left_part=left_part.pixels)
             self.keypad = _TrellisKeypad(part=_TRELLISM4_RIGHT_PART,
