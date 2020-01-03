@@ -9,8 +9,8 @@ Introduction
     :target: https://discord.gg/nBQh6qu
     :alt: Discord
 
-.. image:: https://travis-ci.com/adafruit/Adafruit_CircuitPython_NeoTrellis.svg?branch=master
-    :target: https://travis-ci.com/adafruit/Adafruit_CircuitPython_NeoTrellis
+.. image:: https://github.com/adafruit/Adafruit_CircuitPython_NeoTrellis/workflows/Build%20CI/badge.svg
+    :target: https://github.com/adafruit/Adafruit_CircuitPython_NeoTrellis/actions/
     :alt: Build Status
 
 This is a library for using the Adafruit_NeoTrellis boards with circuitpython.
