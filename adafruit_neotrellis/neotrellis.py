@@ -61,14 +61,18 @@ _NEO_TRELLIS_NUM_KEYS = const(16)
 
 _NEO_TRELLIS_MAX_CALLBACKS = const(32)
 
+
 def _key(xval):
-    return int(int(xval/4)*8 + (xval%4))
+    return int(int(xval / 4) * 8 + (xval % 4))
+
 
 def _seesaw_key(xval):
-    return int(int(xval/8)*4 + (xval%8))
+    return int(int(xval / 8) * 4 + (xval % 8))
+
 
 class NeoTrellis(Keypad):
     """Driver for the Adafruit NeoTrellis."""
+
     def __init__(self, i2c_bus, interrupt=False, addr=_NEO_TRELLIS_ADDR, drdy=None):
         super().__init__(i2c_bus, addr, drdy)
         self.interrupt_enabled = interrupt
@@ -87,11 +91,14 @@ class NeoTrellis(Keypad):
         """read any events from the Trellis hardware and call associated
            callbacks"""
         available = self.count
-        sleep(.0005)
+        sleep(0.0005)
         if available > 0:
             available = available + 2
             buf = self.read_keypad(available)
             for raw in buf:
                 evt = KeyEvent(_seesaw_key((raw >> 2) & 0x3F), raw & 0x3)
-                if evt.number < _NEO_TRELLIS_NUM_KEYS and self.callbacks[evt.number] is not None:
+                if (
+                    evt.number < _NEO_TRELLIS_NUM_KEYS
+                    and self.callbacks[evt.number] is not None
+                ):
                     self.callbacks[evt.number](evt)
