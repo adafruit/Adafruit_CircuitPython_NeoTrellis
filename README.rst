@@ -58,6 +58,11 @@ Usage Example
 
 see examples/neotrellis_simpletest.py for usage example
 
+Documentation
+=============
+
+API documentation for this library can be found on `Read the Docs <https://circuitpython.readthedocs.io/projects/neotrellis/en/latest/>`_.
+
 Contributing
 ============
 
