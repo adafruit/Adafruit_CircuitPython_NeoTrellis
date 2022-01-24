@@ -2,7 +2,7 @@ Introduction
 ============
 
 .. image:: https://readthedocs.org/projects/adafruit-circuitpython-neotrellis/badge/?version=latest
-    :target: https://circuitpython.readthedocs.io/projects/neotrellis/en/latest/
+    :target: https://docs.circuitpython.org/projects/neotrellis/en/latest/
     :alt: Documentation Status
 
 .. image:: https://img.shields.io/discord/327254708534116352.svg
@@ -61,7 +61,7 @@ see examples/neotrellis_simpletest.py for usage example
 Documentation
 =============
 
-API documentation for this library can be found on `Read the Docs <https://circuitpython.readthedocs.io/projects/neotrellis/en/latest/>`_.
+API documentation for this library can be found on `Read the Docs <https://docs.circuitpython.org/projects/neotrellis/en/latest/>`_.
 
 Contributing
 ============
