@@ -6,3 +6,6 @@
 
 .. automodule:: adafruit_neotrellis.neotrellis
    :members:
+
+.. automodule:: adafruit_neotrellis.multitrellis
+   :members:
