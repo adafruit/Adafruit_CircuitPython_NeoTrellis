@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 """
-interface for connecting together multiple NeoTrellis boards.
+Interface for connecting together multiple NeoTrellis boards.
 """
 
 # imports
