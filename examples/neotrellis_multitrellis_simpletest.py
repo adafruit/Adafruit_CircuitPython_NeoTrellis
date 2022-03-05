@@ -40,7 +40,7 @@ def blink(xcoord, ycoord, edge):
     # turn the LED on when a rising edge is detected
     if edge == NeoTrellis.EDGE_RISING:
         trellis.color(xcoord, ycoord, BLUE)
-    # turn the LED off when a rising edge is detected
+    # turn the LED off when a falling edge is detected
     elif edge == NeoTrellis.EDGE_FALLING:
         trellis.color(xcoord, ycoord, OFF)
 

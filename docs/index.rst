@@ -11,6 +11,7 @@ Table of Contents
 
 .. toctree::
     :caption: Examples
+    :maxdepth: 3
 
     examples
 
