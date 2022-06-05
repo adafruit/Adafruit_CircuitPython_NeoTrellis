@@ -103,7 +103,7 @@ class MultiTrellis:
     @property
     def brightness(self):
         """The NeoPixel brightness level of all clustered NeoTrellis boards."""
-        return self.brightness
+        return self._brightness
 
     @brightness.setter
     def brightness(self, new_brightness):

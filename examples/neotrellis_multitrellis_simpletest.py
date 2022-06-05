@@ -27,7 +27,7 @@ trelli = [
 trellis = MultiTrellis(trelli)
 
 # Set the brightness value (0 to 1.0)
-trellis.brightness = 0.05
+trellis.brightness = 0.5
 
 # some color definitions
 OFF = (0, 0, 0)
