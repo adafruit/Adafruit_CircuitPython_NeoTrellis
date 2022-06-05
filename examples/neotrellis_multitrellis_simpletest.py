@@ -22,7 +22,7 @@ trelli = [
 trelli = [
     [NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F)],
     [NeoTrellis(i2c_bus, False, addr=0x30), NeoTrellis(i2c_bus, False, addr=0x31)],
-    ]
+]
 
 trellis = MultiTrellis(trelli)
 

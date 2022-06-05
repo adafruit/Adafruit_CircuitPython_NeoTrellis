@@ -1,15 +1,36 @@
-# SPDX-FileCopyrightText: 2018 Dean Miller for Adafruit Industries
+# SPDX-FileCopyrightText: 2021 Dean Miller for Adafruit Industries
 #
 # SPDX-License-Identifier: MIT
 
 """
-Interface for connecting together multiple NeoTrellis boards.
+``adafruit_multitrellis``
+====================================================
+
+A CircuitPython driver class for interfacing clusters of 4x4 NeoTrellis with
+elastomer buttons and NeoPixel RGB LEDs.
+
+* Author(s): Dean Miller, JG for CedarGroveMakerStudios
+
+Implementation Notes
+--------------------
+
+**Hardware:**
+
+* 'NeoTrellis RGB Driver PCB for 4x4 Keypad, PID: 3954
+  <https://www.adafruit.com/product/3954>'
+
+**Software and Dependencies:**
+
+* Adafruit CircuitPython firmware for the supported boards:
+  https://github.com/adafruit/circuitpython/releases
+
+* Adafruit Seesaw CircuitPython library
+  https://github.com/adafruit/Adafruit_CircuitPython_seesaw/releases
 """
 
-# imports
-
-__version__ = "1.1.8"
+__version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_neotrellis.git"
+
 
 from time import sleep
 from micropython import const
@@ -81,11 +102,14 @@ class MultiTrellis:
 
     @property
     def brightness(self):
+        """The NeoPixel brightness level of all clustered NeoTrellis boards."""
         return self.brightness
 
     @brightness.setter
     def brightness(self, new_brightness):
+        """Select a NeoPixel brightness level for all all clustered boards. A
+        valid brightness value is in the range of 0.0 to 1.0."""
         self._brightness = new_brightness
         for _r in range(self._rows):
-            for _c in range (self._cols):
+            for _c in range(self._cols):
                 self._trelli[_r][_c].brightness = self._brightness
