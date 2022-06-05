@@ -54,7 +54,7 @@ def _key(xval):
 def _seesaw_key(xval):
     return int(int(xval / 8) * 4 + (xval % 8))
 
-
+# pylint: disable=too-many-arguments
 class NeoTrellis(Keypad):
     """Driver for the Adafruit 4x4 NeoTrellis."""
 
