@@ -8,7 +8,7 @@ Interface for connecting together multiple NeoTrellis boards.
 
 # imports
 
-__version__ = "0.0.0-auto.0"
+__version__ = "1.1.8"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_neotrellis.git"
 
 from time import sleep
@@ -78,3 +78,14 @@ class MultiTrellis:
                             y = int(evt.number / 4) + _n * 4
                             x = int(evt.number % 4) + _m * 4
                             _t.callbacks[evt.number](x, y, evt.edge)
+
+    @property
+    def brightness(self):
+        return self.brightness
+
+    @brightness.setter
+    def brightness(self, new_brightness):
+        self._brightness = new_brightness
+        for _r in range(self._rows):
+            for _c in range (self._cols):
+                self._trelli[_r][_c].brightness = self._brightness

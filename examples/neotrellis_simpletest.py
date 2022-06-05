@@ -1,17 +1,18 @@
-# SPDX-FileCopyrightText: 2021 ladyada for Adafruit Industries
+# SPDX-FileCopyrightText: 2022 ladyada for Adafruit Industries
 # SPDX-License-Identifier: MIT
 
 import time
-
-from board import SCL, SDA
-import busio
+import board
 from adafruit_neotrellis.neotrellis import NeoTrellis
 
 # create the i2c object for the trellis
-i2c_bus = busio.I2C(SCL, SDA)
+i2c_bus = board.I2C()
 
 # create the trellis
 trellis = NeoTrellis(i2c_bus)
+
+# Set the brightness value (0 to 1.0)
+trellis.brightness = 0.05
 
 # some color definitions
 OFF = (0, 0, 0)
