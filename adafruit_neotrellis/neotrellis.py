@@ -34,7 +34,7 @@ __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_neotrellis.git"
 from time import sleep
 from micropython import const
 from adafruit_seesaw.keypad import Keypad, KeyEvent
-from adafruit_seesaw.neopixel import NeoPixel
+from adafruit_seesaw.neopixel import NeoPixel, GRB
 
 _NEO_TRELLIS_ADDR = const(0x2E)
 
@@ -76,6 +76,7 @@ class NeoTrellis(Keypad):
             _NEO_TRELLIS_NEOPIX_PIN,
             _NEO_TRELLIS_NUM_KEYS,
             brightness=self._brightness,
+            pixel_order=GRB,
         )
 
     def activate_key(self, key, edge, enable=True):
