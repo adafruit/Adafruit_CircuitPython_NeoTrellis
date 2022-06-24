@@ -1,30 +1,33 @@
-# SPDX-FileCopyrightText: 2021 ladyada for Adafruit Industries
+# SPDX-FileCopyrightText: 2022 ladyada for Adafruit Industries
 # SPDX-License-Identifier: MIT
 
 import time
-
-from board import SCL, SDA
-import busio
+import board
 from adafruit_neotrellis.neotrellis import NeoTrellis
 from adafruit_neotrellis.multitrellis import MultiTrellis
 
-# create the i2c object for the trellis
-i2c_bus = busio.I2C(SCL, SDA)
+# Create the I2C object for the NeoTrellis
+i2c_bus = board.I2C()
 
-"""create the trellis. This is for a 2x2 array of NeoTrellis boards
-for a 2x1 array (2 boards connected left to right) you would use:
+# Create the NeoTrellis object
+"""
+# This is for a 2x1 array (2 boards connected left to right):
 
 trelli = [
-    [NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F)]
+    [NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F)],
     ]
 
 """
+# This is for a 2x2 array of NeoTrellis boards:
 trelli = [
     [NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F)],
     [NeoTrellis(i2c_bus, False, addr=0x30), NeoTrellis(i2c_bus, False, addr=0x31)],
 ]
 
 trellis = MultiTrellis(trelli)
+
+# Set the brightness value (0 to 1.0)
+trellis.brightness = 0.5
 
 # some color definitions
 OFF = (0, 0, 0)
@@ -35,21 +38,21 @@ CYAN = (0, 255, 255)
 BLUE = (0, 0, 255)
 PURPLE = (180, 0, 255)
 
-# this will be called when button events are received
+# This will be called when button events are received
 def blink(xcoord, ycoord, edge):
-    # turn the LED on when a rising edge is detected
+    # Turn the LED on when a rising edge is detected
     if edge == NeoTrellis.EDGE_RISING:
         trellis.color(xcoord, ycoord, BLUE)
-    # turn the LED off when a falling edge is detected
+    # Turn the LED off when a falling edge is detected
     elif edge == NeoTrellis.EDGE_FALLING:
         trellis.color(xcoord, ycoord, OFF)
 
 
 for y in range(8):
     for x in range(8):
-        # activate rising edge events on all keys
+        # Activate rising edge events on all keys
         trellis.activate_key(x, y, NeoTrellis.EDGE_RISING)
-        # activate falling edge events on all keys
+        # Activate falling edge events on all keys
         trellis.activate_key(x, y, NeoTrellis.EDGE_FALLING)
         trellis.set_callback(x, y, blink)
         trellis.color(x, y, PURPLE)
@@ -61,6 +64,6 @@ for y in range(8):
         time.sleep(0.05)
 
 while True:
-    # the trellis can only be read every 17 millisecons or so
+    # The NeoTrellis can only be read every 17 milliseconds or so
     trellis.sync()
     time.sleep(0.02)

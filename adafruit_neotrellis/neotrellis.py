@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2018 Dean Miller for Adafruit Industries
+# SPDX-FileCopyrightText: 2021 Dean Miller for Adafruit Industries
 #
 # SPDX-License-Identifier: MIT
 
@@ -6,14 +6,18 @@
 ``adafruit_neotrellis``
 ====================================================
 
-4x4 elastomer buttons and RGB LEDs
+A CircuitPython driver class for the 4x4 NeoTrellis with elastomer buttons and
+NeoPixel RGB LEDs.
 
-* Author(s): Dean Miller
+* Author(s): Dean Miller, JG for CedarGroveMakerStudios
 
 Implementation Notes
 --------------------
 
 **Hardware:**
+
+* 'NeoTrellis RGB Driver PCB for 4x4 Keypad, PID: 3954
+  <https://www.adafruit.com/product/3954>'
 
 **Software and Dependencies:**
 
@@ -23,8 +27,6 @@ Implementation Notes
 * Adafruit Seesaw CircuitPython library
   https://github.com/adafruit/Adafruit_CircuitPython_seesaw/releases
 """
-
-# imports
 
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_neotrellis.git"
@@ -53,15 +55,28 @@ def _seesaw_key(xval):
     return int(int(xval / 8) * 4 + (xval % 8))
 
 
+# pylint: disable=too-many-arguments
 class NeoTrellis(Keypad):
-    """Driver for the Adafruit NeoTrellis."""
+    """Driver for the Adafruit 4x4 NeoTrellis."""
 
-    def __init__(self, i2c_bus, interrupt=False, addr=_NEO_TRELLIS_ADDR, drdy=None):
+    def __init__(
+        self,
+        i2c_bus,
+        interrupt=False,
+        addr=_NEO_TRELLIS_ADDR,
+        drdy=None,
+        brightness=1.0,
+    ):
         super().__init__(i2c_bus, addr, drdy)
         self.interrupt_enabled = interrupt
+        self._brightness = brightness
         self.callbacks = [None] * _NEO_TRELLIS_NUM_KEYS
         self.pixels = NeoPixel(
-            self, _NEO_TRELLIS_NEOPIX_PIN, _NEO_TRELLIS_NUM_KEYS, pixel_order=GRB
+            self,
+            _NEO_TRELLIS_NEOPIX_PIN,
+            _NEO_TRELLIS_NUM_KEYS,
+            brightness=self._brightness,
+            pixel_order=GRB,
         )
 
     def activate_key(self, key, edge, enable=True):
@@ -87,3 +102,15 @@ class NeoTrellis(Keypad):
                     and self.callbacks[evt.number] is not None
                 ):
                     self.callbacks[evt.number](evt)
+
+    @property
+    def brightness(self):
+        """The NeoPixel brightness level of the board."""
+        return self._brightness
+
+    @brightness.setter
+    def brightness(self, new_brightness):
+        """Select a NeoPixel brightness level for the board. A valid brightness
+        value is in the range of 0.0 to 1.0."""
+        self._brightness = new_brightness
+        self.pixels.brightness = self._brightness
