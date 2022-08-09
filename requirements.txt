@@ -4,4 +4,3 @@
 
 Adafruit-Blinka
 adafruit-circuitpython-seesaw
-adafruit-circuitpython-pixelbuf
