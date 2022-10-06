@@ -100,6 +100,12 @@ class MultiTrellis:
                             x = int(evt.number % 4) + _m * 4
                             _t.callbacks[evt.number](x, y, evt.edge)
 
+    def show(self):
+        """Show the colors on the NeoPixels"""
+        for _n in range(self._rows):
+            for _m in range(self._cols):
+                self._trelli[_n][_m].show()
+
     @property
     def brightness(self):
         """The NeoPixel brightness level of all clustered NeoTrellis boards."""

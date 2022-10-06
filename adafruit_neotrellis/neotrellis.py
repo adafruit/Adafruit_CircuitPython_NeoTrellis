@@ -66,6 +66,7 @@ class NeoTrellis(Keypad):
         addr=_NEO_TRELLIS_ADDR,
         drdy=None,
         brightness=1.0,
+        auto_write=True,
     ):
         super().__init__(i2c_bus, addr, drdy)
         self.interrupt_enabled = interrupt
@@ -77,6 +78,7 @@ class NeoTrellis(Keypad):
             _NEO_TRELLIS_NUM_KEYS,
             brightness=self._brightness,
             pixel_order=GRB,
+            auto_write=auto_write,
         )
 
     def activate_key(self, key, edge, enable=True):
@@ -102,6 +104,10 @@ class NeoTrellis(Keypad):
                     and self.callbacks[evt.number] is not None
                 ):
                     self.callbacks[evt.number](evt)
+
+    def show(self):
+        """Show the NeoPixels on the Trellis"""
+        self.pixels.show()
 
     @property
     def brightness(self):
