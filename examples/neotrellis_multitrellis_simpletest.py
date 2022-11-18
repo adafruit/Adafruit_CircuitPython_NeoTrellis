@@ -7,7 +7,8 @@ from adafruit_neotrellis.neotrellis import NeoTrellis
 from adafruit_neotrellis.multitrellis import MultiTrellis
 
 # Create the I2C object for the NeoTrellis
-i2c_bus = board.I2C()
+i2c_bus = board.I2C()  # uses board.SCL and board.SDA
+# i2c = board.STEMMA_I2C()  # For using the built-in STEMMA QT connector on a microcontroller
 
 # Create the NeoTrellis object
 """
