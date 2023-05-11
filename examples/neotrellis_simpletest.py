@@ -24,6 +24,7 @@ CYAN = (0, 255, 255)
 BLUE = (0, 0, 255)
 PURPLE = (180, 0, 255)
 
+
 # this will be called when button events are received
 def blink(event):
     # turn the LED on when a rising edge is detected

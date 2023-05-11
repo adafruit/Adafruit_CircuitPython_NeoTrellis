@@ -83,7 +83,6 @@ class MultiTrellis:
         """Read all trellis boards in the matrix and call any callbacks"""
         for _n in range(self._rows):
             for _m in range(self._cols):
-
                 _t = self._trelli[_n][_m]
                 available = _t.count
                 sleep(0.0005)
