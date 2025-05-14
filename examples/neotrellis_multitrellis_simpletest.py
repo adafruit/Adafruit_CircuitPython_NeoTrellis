@@ -2,9 +2,11 @@
 # SPDX-License-Identifier: MIT
 
 import time
+
 import board
-from adafruit_neotrellis.neotrellis import NeoTrellis
+
 from adafruit_neotrellis.multitrellis import MultiTrellis
+from adafruit_neotrellis.neotrellis import NeoTrellis
 
 # Create the I2C object for the NeoTrellis
 i2c_bus = board.I2C()  # uses board.SCL and board.SDA
