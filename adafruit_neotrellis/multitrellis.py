@@ -33,8 +33,9 @@ __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_neotrellis.git"
 
 
 from time import sleep
-from micropython import const
+
 from adafruit_seesaw.keypad import KeyEvent
+from micropython import const
 
 _NEO_TRELLIS_NUM_KEYS = const(16)
 

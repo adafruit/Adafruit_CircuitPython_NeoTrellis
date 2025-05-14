@@ -32,9 +32,10 @@ __version__ = "0.0.0+auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_neotrellis.git"
 
 from time import sleep
+
+from adafruit_seesaw.keypad import KeyEvent, Keypad
+from adafruit_seesaw.neopixel import GRB, NeoPixel
 from micropython import const
-from adafruit_seesaw.keypad import Keypad, KeyEvent
-from adafruit_seesaw.neopixel import NeoPixel, GRB
 
 _NEO_TRELLIS_ADDR = const(0x2E)
 
@@ -55,7 +56,6 @@ def _seesaw_key(xval):
     return int(int(xval / 8) * 4 + (xval % 8))
 
 
-# pylint: disable=too-many-arguments
 class NeoTrellis(Keypad):
     """Driver for the Adafruit 4x4 NeoTrellis."""
 
@@ -99,10 +99,7 @@ class NeoTrellis(Keypad):
             buf = self.read_keypad(available)
             for raw in buf:
                 evt = KeyEvent(_seesaw_key((raw >> 2) & 0x3F), raw & 0x3)
-                if (
-                    evt.number < _NEO_TRELLIS_NUM_KEYS
-                    and self.callbacks[evt.number] is not None
-                ):
+                if evt.number < _NEO_TRELLIS_NUM_KEYS and self.callbacks[evt.number] is not None:
                     self.callbacks[evt.number](evt)
 
     def show(self):
